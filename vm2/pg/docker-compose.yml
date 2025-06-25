@@ -1,0 +1,26 @@
+services:
+    db:
+        image: postgres:latest
+        container_name: postgres
+        restart: unless-stopped
+        env_file:
+          - .env
+        volumes:
+          - db_data:/var/lib/postgresql/data
+        expose:
+          - "5432"
+
+    pgadmin:
+        image: dpage/pgadmin4
+        container_name: pgadmin
+        restart: unless-stopped
+        env_file:
+          - .env
+        ports:
+          - "80:80"
+        volumes:
+          - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  db_data:
+  pgadmin_data:
